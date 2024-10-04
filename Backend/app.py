@@ -4,12 +4,14 @@ import secrets
 from routes.auth import auth_bp
 from routes.leagues import leagues_bp
 from routes.teams import teams_bp
+from flask_cors import CORS
 
 
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
 generated_secret_key = secrets.token_hex(24)  # Generates a random 24-byte hexadecimal string
 app = Flask(__name__)
+CORS(app)
 
 
 # Use a persistent secret key (preferably from environment variable)
