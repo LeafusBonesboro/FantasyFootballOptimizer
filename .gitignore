@@ -1,27 +1,16 @@
-# Python-related
-venv/
-__pycache__/
+# Ignore virtual environments
+backend/FFapi_env/
+
+# Ignore Python bytecode
 *.pyc
-*.pyo
-.env
+__pycache__/
 
-# Ignore tokens and secrets
-backend/tokens.json
-
-# Node-related (for React)
-node_modules/
-npm-debug.log
-yarn-error.log
-
-# OS-related
-.DS_Store
-Thumbs.db
-
-# Logs
+# Ignore logs
 *.log
 
-# React build files
-build/
+# Ignore build files for React frontend
+frontend/build/
+frontend/dist/
 
-__pycache__
-README.md
+# Ignore node_modules for React frontend
+frontend/node_modules/
