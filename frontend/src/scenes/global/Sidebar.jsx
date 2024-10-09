@@ -136,6 +136,13 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
+             <Item
+              title="My Account"
+              to="/myaccount"
+              icon={<PeopleOutlinedIcon />} // You can change to another icon
+              selected={selected}
+              setSelected={setSelected}
+            />
           </Box>
         </Menu>
       </ProSidebar>

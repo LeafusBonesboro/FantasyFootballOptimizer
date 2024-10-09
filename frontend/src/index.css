@@ -1,4 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap');
+@media (max-width: 600px) {
+  /* Mobile styles */
+}
+
 
 html,
 body,
