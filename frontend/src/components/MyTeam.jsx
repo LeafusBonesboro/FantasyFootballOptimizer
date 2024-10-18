@@ -5,7 +5,7 @@ const MyTeam = () => {
 
   useEffect(() => {
     // Fetch the "My Team" data from Flask API
-    fetch('http://localhost:5000/teams/my_team')
+    fetch('https://ffopt-render.onrender.com/teams/my_team')
       .then(response => response.json())
       .then(data => {
         setTeamData(data);

@@ -6,7 +6,7 @@ const AllTeams = () => {
 
   useEffect(() => {
     // Replace the URL with your actual backend URL
-    fetch('http://localhost:5000/teams/all_teams')
+    fetch('https://ffopt-render.onrender.com/teams/all_teams')
       .then((response) => response.json())
       .then((data) => {
         setTeamData(data);
