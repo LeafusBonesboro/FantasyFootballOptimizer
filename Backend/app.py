@@ -29,5 +29,5 @@ def home():
     return render_template('base.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run
 # .\ngrok http 5000
