@@ -44,7 +44,7 @@ def callback():
     session['oauth_token'] = token
     save_token(token)
 
-    return "OAuth Successful!"
+    return redirect('http://localhost:5173')
 
 
 @auth_bp.route('/refresh_token')
