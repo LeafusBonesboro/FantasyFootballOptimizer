@@ -4,7 +4,7 @@ import React from "react";
 const Login = () => {
   const handleLogin = () => {
     // Redirect user to backend route that starts Yahoo OAuth
-    window.location.href = "https://https://ffopt-render.onrender.com/auth/login";
+    window.location.href = "https://ffopt-render.onrender.com/auth/login";
 
   };
 
