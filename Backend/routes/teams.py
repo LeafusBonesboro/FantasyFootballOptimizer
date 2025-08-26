@@ -1,8 +1,20 @@
+import os
+import csv
 from flask import Blueprint, jsonify, session, redirect, url_for, request
 from requests_oauthlib import OAuth2Session
 from tokens import load_token
 import config
 from decorators import require_oauth_token 
+import re, urllib.parse
+
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # this = Backend/routes/
+DATA_DIR = os.path.join(BASE_DIR, "..", "data")
+
+RANKINGS_CSV_PATH = os.path.join(DATA_DIR, "rankings.csv")
+PLAYER_IMAGES_CSV_PATH = os.path.join(DATA_DIR, "player_images.csv")
+
+
 
 teams_bp = Blueprint('teams', __name__)
 
@@ -225,4 +237,66 @@ def get_player_info():
 
 
 
+def format_player_name(name: str) -> str:
+    """
+    Convert ranking player names into the same format as in the CSV URLs.
+    Example: "Omarion Hampton" -> "omarion-hampton"
+             "Ashton Jeanty"   -> "ashton-jeanty" (fallback also checks underscore)
+             "Trey McBride"    -> "trey-mcbride"
+    """
+    if not name:
+        return ""
+    return name.lower().replace(" ", "-").strip()
 
+
+@teams_bp.route('/rankings', methods=['GET'])
+def get_rankings():
+    players = []
+    images = {}
+
+    # Load image CSV
+    try:
+        with open(PLAYER_IMAGES_CSV_PATH, newline='', encoding='utf-8') as imgfile:
+            reader = csv.DictReader(imgfile)
+            for row in reader:
+                url = row.get("player_image", "")
+                if not url:
+                    continue
+
+                filename = url.split("/")[-1].replace(".webp", "")
+                player_name = filename.split("-", 1)[-1]  # "8130-Trey-McBride" → "Trey-McBride"
+
+                # Store both hyphen and space versions as keys
+                images[player_name] = url
+                images[player_name.replace("-", " ")] = url
+
+    except FileNotFoundError:
+        print("⚠️ player_images.csv not found")
+
+    # Load rankings CSV
+    try:
+        with open(RANKINGS_CSV_PATH, newline='', encoding='utf-8') as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                player_name = row.get("Player", "").strip()
+
+                # Now lookup works for both
+                image_url = images.get(player_name, None)
+
+                players.append({
+                    "name": player_name,
+                    "position": row.get("Pos"),
+                    "team": row.get("Team"),
+                    "adp": row.get("ADP"),
+                    "rank": row.get("Rank"),
+                    "imageUrl": image_url
+                })
+    except FileNotFoundError:
+        return jsonify({"error": "Rankings CSV not found"}), 404
+
+    # Sort players by ADP
+    players.sort(
+        key=lambda x: float(x['adp']) if x['adp'] not in (None, '', 'NA') else float('inf')
+    )
+
+    return jsonify(players)

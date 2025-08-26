@@ -44,7 +44,8 @@ def callback():
     session['oauth_token'] = token
     save_token(token)
 
-    return redirect('http://localhost:5173')
+    return redirect("https://leafusbonesboro.github.io/FantasyFootballOptimizer/")
+
 
 
 @auth_bp.route('/refresh_token')

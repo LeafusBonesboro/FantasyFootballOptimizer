@@ -24,7 +24,6 @@ app.secret_key = os.getenv('FLASK_SECRET_KEY', 'a_fixed_secret_key_here')
 app.register_blueprint(auth_bp, url_prefix='/auth')  # Add the /auth pre
 app.register_blueprint(leagues_bp)
 app.register_blueprint(teams_bp, url_prefix='/teams')  # Add a prefix for API routes
-
 app.register_blueprint(local_auth_bp, url_prefix='/local_auth')
 
 @app.route('/')

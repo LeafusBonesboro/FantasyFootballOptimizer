@@ -106,3 +106,45 @@ def choose_league():
 
     # Render the league details on the page
     return render_template('choose_league.html', league_name=league_name, league_url=league_url)
+
+
+
+@leagues_bp.route('/available_players/<league_key>')
+def get_available_players(league_key):
+    token = load_token()
+    if not token:
+        return redirect(url_for('auth.login'))
+
+    yahoo = OAuth2Session(config.CLIENT_ID, token=token)
+    response = yahoo.get(f'https://fantasysports.yahooapis.com/fantasy/v2/league/{league_key}/players?format=json')
+
+    if response.status_code != 200:
+        return {"error": f"Failed to fetch players. {response.text}"}, response.status_code
+
+    data = response.json()
+
+    players = []
+
+    # Parse out players
+    raw_players = data['fantasy_content']['league'][1]['players']
+    for key, p_data in raw_players.items():
+        if key == "count":
+            continue
+        player = p_data['player'][0]  # array of player info chunks
+
+        # Extract name + position safely
+        name = None
+        pos = None
+        for chunk in player:
+            if isinstance(chunk, dict):
+                if 'name' in chunk:
+                    name = chunk['name']['full']
+                if 'display_position' in chunk:
+                    pos = chunk['display_position']
+
+        players.append({
+            "name": name,
+            "position": pos
+        })
+
+    return {"players": players}
