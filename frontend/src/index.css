@@ -1,4 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @media (max-width: 600px) {
   /* Mobile styles */
 }
@@ -120,3 +125,30 @@ width: 10px
   margin-top: 10px; /* Add some spacing above */
 }
 
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+button {
+  margin: 5px;
+  padding: 5px;
+}
+
+label {
+  font-size: 20px;
+}
+
+input {
+  font-size: 18px;
+  margin-left: 5px;
+}

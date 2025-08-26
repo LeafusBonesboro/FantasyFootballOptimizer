@@ -20,8 +20,8 @@ export const tokens = (mode) => ({
           100: "#d0d1d5",
           200: "#a1a4ab",
           300: "#727681",
-          400: "#1F2A40",
-          500: "#141b2d",
+          400: "#140f10",
+          500: "#140f10", //Background
           600: "#101624",
           700: "#0c101b",
           800: "#080b12",
@@ -56,7 +56,7 @@ export const tokens = (mode) => ({
           400: "#868dfb",
           500: "#6870fa",
           600: "#535ac8",
-          700: "#3e4396",
+          700: "#3e4396", //Download reports on Dashboard
           800: "#2a2d64",
           900: "#151632",
         },
@@ -77,8 +77,8 @@ export const tokens = (mode) => ({
           100: "#040509",
           200: "#080b12",
           300: "#0c101b",
-          400: "#f2f0f0", // manually changed
-          500: "#141b2d",
+          400: "#FFA500", // manually changed
+          500: "#1E1618", // background
           600: "#1F2A40",
           700: "#727681",
           800: "#a1a4ab",
