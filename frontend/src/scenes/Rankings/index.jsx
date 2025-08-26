@@ -6,7 +6,8 @@ export default function RankingsScene() {
   const [search, setSearch] = useState("");
 
   useEffect(() => {
-    fetch("http://127.0.0.1:5000/teams/rankings")
+    fetch("https://ffopt-render.onrender.com/teams/rankings")
+
       .then((res) => res.json())
       .then((data) => setPlayers(data));
   }, []);
@@ -28,10 +29,9 @@ export default function RankingsScene() {
   return (
     <div className="p-6 font-poppins text-text-default bg-background min-h-screen">
       {/* Header */}
-     
-<div className="flex items-end flex-wrap gap-6 mb-6">
+<div className="flex flex-wrap gap-4 md:gap-6 mb-6 w-full">
   {/* Format */}
-  <div className="flex flex-col">
+  <div className="flex flex-col w-1/2 sm:w-auto">
     <label className="text-sm mb-1">Format:</label>
     <select className="px-3 py-2 rounded bg-[#1c1c1c] text-white border border-[#3a2e2e]">
       <option>2025</option>
@@ -40,9 +40,9 @@ export default function RankingsScene() {
   </div>
 
   {/* Positions */}
-  <div className="flex flex-col">
+  <div className="flex flex-col w-full sm:w-auto">
     <label className="text-sm mb-1">Positions:</label>
-    <div className="flex gap-2">
+    <div className="flex flex-wrap gap-2">
       {["Overall", "QB", "RB", "WR", "TE"].map((pos) => (
         <button
           key={pos}
@@ -61,7 +61,7 @@ export default function RankingsScene() {
   </div>
 
   {/* Sort By */}
-  <div className="flex flex-col">
+  <div className="flex flex-col w-1/2 sm:w-auto">
     <label className="text-sm mb-1">Sort by:</label>
     <select className="px-3 py-2 rounded bg-[#1c1c1c] text-white border border-[#3a2e2e]">
       <option>Expert</option>
@@ -70,7 +70,7 @@ export default function RankingsScene() {
   </div>
 
   {/* Filters */}
-  <div className="flex flex-col">
+  <div className="flex flex-col w-1/2 sm:w-auto">
     <label className="text-sm mb-1">Filters:</label>
     <select className="px-3 py-2 rounded bg-[#1c1c1c] text-white border border-[#3a2e2e]">
       <option>0 active</option>
@@ -78,18 +78,19 @@ export default function RankingsScene() {
   </div>
 
   {/* Search Bar */}
-  <div className="flex flex-col flex-1">
-    <label className="text-sm mb-1 invisible">Search</label> {/* keeps alignment */}
+  <div className="flex flex-col w-full sm:flex-1">
+    <label className="text-sm mb-1 invisible">Search</label>
     <input
       type="text"
       placeholder="Search for a player..."
       value={search}
       onChange={(e) => setSearch(e.target.value)}
       className="px-4 py-2 rounded bg-[#1c1c1c] text-white border border-[#3a2e2e] 
-                 placeholder-gray-400 focus:ring-2 focus:ring-flockOrange"
+                 placeholder-gray-400 focus:ring-2 focus:ring-flockOrange w-full"
     />
   </div>
 </div>
+
 
 
       {/* Player List */}
